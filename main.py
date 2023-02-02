@@ -27,16 +27,11 @@ def get_palette():
 def get_block_data():
     block_data = (schematic['BlockData'].value).hex()
     # for every 2 hex values, add a space\
-    block_data = " ".join(block_data[i:i+2] for i in range(0, len(block_data), 2))
     
-    # write to text file
-    with open("block_data.txt", "w") as f:
-        f.write(block_data)
-    
+        
     # write to hex file
-    with open("block_data.txt") as f, open ("block_data", "wb") as f2:
-        for line in f:
-            f2.write(binascii.unhexlify(''.join(line.split())))
+    with open ("block_data", "wb") as f:
+        f.write(binascii.unhexlify(block_data))
     
    
    
