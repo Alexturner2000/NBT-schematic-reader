@@ -1,0 +1,21 @@
+"""
+NBT file structure:
+
+│   Block Data          
+│   Data Version       
+│   Height              
+│   Length              
+│   Offset              
+│   PaletteMax 
+│   Version             
+│   Width               
+│
+├───Metadata            
+└───Pallette            
+
+
+BlockData is a list of bytes, each byte represents a block in the schematic. These bytes are the index of the block in the palette.
+Each hex entry cooresponds to a coardonate in the schematic. It traverses the x axis first, then the z axis, then the y axis.
+
+
+"""
