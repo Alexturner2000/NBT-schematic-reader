@@ -33,33 +33,34 @@ def block_placement():
     length = schematic['Length'].value
     print(f"Dimensions: {width} x {height} x {length}")
     
-    x,y,z = 0,0,0
     
+    # Creates coordinates for each block
+    x,z,y = 0,0,0
+    arr = []
+    for x in range(0, height):
+        for z in range(0, width):
+                for y in range(0, length):
+                    arr.append((x, y, z))
+
+                    
     
-    #increment x, y, z with maximum width height and length
+    # read block_data hex file and adds coordinates and blocktype to the [block class]
     with open ("block_data", "rb") as f:
         for line in f:
-            for i in range(0, len(line)):
+            for i in range(0, len(line)): #loops for each hex value in block
                 for items in palette:
                     if schematic['Palette'][items].value == line[i]:
-                        
                         # formating
                         items = items[10:] 
                         if "[" in items:
                             items = items.split("[")[0]  
+                        
+                        # access x, y, z from array
+                        x, y, z = arr[i]
                                                                   
                         block = Block_Plane(x, z, y, items)
-                        print(block)
-
-    # for x in range(0, height):
-    #     for z in range(0, width):
-    #         for y in range(0, length):
-    #             print(f"{x}, {y}, {z}") # (x,y,z)
-    #             
-    #             # put the x z and y values into 3d array
-
-    return
-                
+                        # increment x by 1 until it reaches width, then increment y by 1 and reset x to 0, then increment z by 1 and reset x and y to 0
+                        print(block)                
 
 
 class Block_Plane:
